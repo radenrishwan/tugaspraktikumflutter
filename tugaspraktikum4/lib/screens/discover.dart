@@ -44,7 +44,7 @@ class DiscoverScreen extends StatelessWidget {
                 hintText: 'Search..',
                 fillColor: Colors.white12,
                 filled: true,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 20),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 18),
               ),
             ),
             const SizedBox(height: 12),
@@ -60,22 +60,65 @@ class DiscoverScreen extends StatelessWidget {
                 children: List.generate(
                   perfect.length,
                   (index) => Padding(
-                    padding: const EdgeInsets.only(right: 8),
+                    padding: const EdgeInsets.only(right: 16),
                     child: perfect[index],
                   ),
                 ),
               ),
             ),
+            const SizedBox(height: 24),
             SingleChildScrollView(
               physics: const ScrollPhysics(),
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: List.generate(
                   discover.length,
-                  (index) => discover[index],
+                  (index) => Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: discover[index],
+                  ),
                 ),
               ),
-            )
+            ),
+            const SizedBox(height: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'April Popular Hits',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Text(
+                      'See All',
+                      style: TextStyle(
+                        color: Colors.white70,
+                      ),
+                    ),
+                    Icon(
+                      Icons.keyboard_arrow_right,
+                      color: Colors.white70,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            SingleChildScrollView(
+              physics: const ScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: List.generate(
+                  popular.length,
+                  (index) => Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: popular[index],
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

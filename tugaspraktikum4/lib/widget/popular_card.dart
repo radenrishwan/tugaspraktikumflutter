@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class PerfectCard extends StatelessWidget {
+class PopularCard extends StatelessWidget {
   final String title;
   final Image image;
-  const PerfectCard({
+  const PopularCard({
     super.key,
     required this.title,
     required this.image,
@@ -21,22 +21,14 @@ class PerfectCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Container(
-            height: 165,
-            width: 165,
+            height: 100,
+            width: 100,
             padding: const EdgeInsets.only(top: 18),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: image.image,
-              ),
-            ),
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
               ),
             ),
           ),

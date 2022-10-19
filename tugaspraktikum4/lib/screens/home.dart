@@ -83,7 +83,7 @@ class HomeScreen extends StatelessWidget {
               child: Row(
                 children: List.generate(recent.length, (index) {
                   return Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(right: 16),
                     child: recent[index],
                   );
                 }),
@@ -119,7 +119,7 @@ class HomeScreen extends StatelessWidget {
               playlists.length,
               (index) {
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(right: 16),
                   child: playlists[index],
                 );
               },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tugaspraktikum4/widget/discover_card.dart';
 import 'package:tugaspraktikum4/widget/perfect_card.dart';
+import 'package:tugaspraktikum4/widget/popular_card.dart';
 
 final List<Widget> perfect = [
   PerfectCard(
@@ -63,5 +64,50 @@ final List<Widget> discover = [
       fit: BoxFit.cover,
     ),
     onTap: () {},
+  ),
+];
+
+final List<Widget> popular = [
+  PopularCard(
+    title: 'Fresh Finds',
+    image: Image.asset(
+      'assets/illustrations/fresh finds.jpg',
+    ),
+  ),
+  PopularCard(
+    title: 'Chilled Hits',
+    image: Image.asset(
+      'assets/illustrations/chilled hits.jpg',
+    ),
+  ),
+  PopularCard(
+    title: 'Best of the year',
+    image: Image.asset(
+      'assets/illustrations/bia.jpg',
+    ),
+  ),
+  PopularCard(
+    title: 'Best of the year',
+    image: Image.asset(
+      'assets/illustrations/bia.jpg',
+    ),
+  ),
+  PopularCard(
+    title: 'Best of the year',
+    image: Image.asset(
+      'assets/illustrations/bia.jpg',
+    ),
+  ),
+  PopularCard(
+    title: 'Best of the year',
+    image: Image.asset(
+      'assets/illustrations/bia.jpg',
+    ),
+  ),
+  PopularCard(
+    title: 'Best of the year',
+    image: Image.asset(
+      'assets/illustrations/bia.jpg',
+    ),
   ),
 ];
