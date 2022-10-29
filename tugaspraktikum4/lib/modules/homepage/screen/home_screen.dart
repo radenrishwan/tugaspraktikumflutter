@@ -139,7 +139,7 @@ class HomeScreen extends StatelessWidget {
                             return AnimeCard(
                               anime: data[index + data.length ~/ 2],
                               onTap: () {
-                                GoRouter.of(context).push('/anime/${data[index * 2].id}');
+                                GoRouter.of(context).push('/anime/${data[index + data.length ~/ 2].id}');
                               },
                             );
                           },
