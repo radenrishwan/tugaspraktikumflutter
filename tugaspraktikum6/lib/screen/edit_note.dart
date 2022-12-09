@@ -72,9 +72,9 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
       child: TextField(
         focusNode: _contentNode,
         readOnly: !isEditable,
-        maxLines: 9999,
+        maxLines: null,
         cursorColor: kPrimaryColor,
-        keyboardType: TextInputType.text,
+        keyboardType: TextInputType.multiline,
         decoration: const InputDecoration(
           border: InputBorder.none,
           hintText: 'Content',

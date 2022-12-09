@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:tugaspraktikum6/data/models/note.dart';
+import 'package:uuid/uuid.dart';
 
 class Sqlite {
   static final Sqlite _instance = Sqlite._();
@@ -27,6 +28,20 @@ class Sqlite {
             content TEXT,
             createdAt INT,
             updatedAt INT
+          )
+
+          INSERT INTO ${Note.tableName} (id, title, content, createdAt, updatedAt) VALUES (
+            '${const Uuid().v4()}',
+            'Welcome to Simple Note',
+            'Hi, Buddy 👋👋👋.
+
+Thanks for using our app. please send us star at github if this app really usefull. And we also open to all contribute, please check our github if you interested
+
+https://github.com/radenrishwan/tugaspraktikumflutter/tree/master/tugaspraktikum6
+
+note: im gonna update github link later',
+            ${DateTime.now().millisecondsSinceEpoch},
+            ${DateTime.now().millisecondsSinceEpoch}
           )
           ''');
       },

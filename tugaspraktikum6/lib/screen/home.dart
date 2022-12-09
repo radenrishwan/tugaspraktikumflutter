@@ -4,6 +4,7 @@ import 'package:tugaspraktikum6/constant/status.dart';
 import 'package:tugaspraktikum6/provider/note.dart';
 import 'package:tugaspraktikum6/screen/create_note.dart';
 import 'package:tugaspraktikum6/screen/edit_note.dart';
+import 'package:tugaspraktikum6/screen/settting.dart';
 import 'package:tugaspraktikum6/widget/note_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -14,6 +15,49 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Simple Note Application'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ListTile(
+                        leading: const Icon(Icons.add),
+                        title: const Text('Create Note'),
+                        onTap: () {
+                          Navigator.pop(context);
+
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const CreateNoteScreen(),
+                            ),
+                          );
+                        },
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.settings),
+                        title: const Text('Settings'),
+                        onTap: () {
+                          Navigator.pop(context);
+
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const SettingScreen(),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            icon: const Icon(Icons.more_vert),
+          ),
+        ],
       ),
       body: Padding(
         padding: kMaterialListPadding,
