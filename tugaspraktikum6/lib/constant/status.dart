@@ -1,0 +1,1 @@
+enum NoteStatus { preview, edit }
