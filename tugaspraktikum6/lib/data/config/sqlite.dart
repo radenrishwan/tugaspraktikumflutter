@@ -20,17 +20,10 @@ class Sqlite {
     return await openDatabase(
       'database.db',
       version: 1,
-      onCreate: (db, version) async {
-        await db.execute('''
-          CREATE TABLE  IF NOT EXISTS ${Note.tableName} (
-            id TEXT PRIMARY KEY,
-            title TEXT,
-            content TEXT,
-            createdAt INT,
-            updatedAt INT
-          )
-
-          INSERT INTO ${Note.tableName} (id, title, content, createdAt, updatedAt) VALUES (
+      onUpgrade: (db, oldVersion, newVersion) async {
+        await db.execute(
+          '''
+  INSERT INTO ${Note.tableName} (id, title, content, createdAt, updatedAt) VALUES (
             '${const Uuid().v4()}',
             'Welcome to Simple Note',
             'Hi, Buddy 👋👋👋.
@@ -42,6 +35,17 @@ https://github.com/radenrishwan/tugaspraktikumflutter/tree/master/tugaspraktikum
 note: im gonna update github link later',
             ${DateTime.now().millisecondsSinceEpoch},
             ${DateTime.now().millisecondsSinceEpoch}
+          )''',
+        );
+      },
+      onCreate: (db, version) async {
+        await db.execute('''
+          CREATE TABLE  IF NOT EXISTS ${Note.tableName} (
+            id TEXT PRIMARY KEY,
+            title TEXT,
+            content TEXT,
+            createdAt INT,
+            updatedAt INT
           )
           ''');
       },

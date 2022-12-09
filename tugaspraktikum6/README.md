@@ -1,1 +1,2 @@
-# TODO: edit readme 
+# Tugas Praktikum 6
+
