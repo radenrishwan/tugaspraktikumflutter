@@ -94,11 +94,6 @@ class HomeScreen extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {},
-        tooltip: 'find data',
-        child: const Icon(Icons.add),
-      ),
     );
   }
 }

@@ -147,6 +147,18 @@ class DetailScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline6,
               ),
               const SizedBox(height: 4),
+              ...List.generate(card.cardSets!.length, (index) {
+                final set = card.cardSets![index];
+
+                return Card(
+                  child: ListTile(
+                    leading: CircleAvatar(child: Text(set.rarityCode)),
+                    title: Text(set.name),
+                    subtitle: Text(set.code),
+                    trailing: Text('\$${set.price}'),
+                  ),
+                );
+              })
             ],
           ),
         ),

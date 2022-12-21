@@ -9,7 +9,7 @@ class Card {
   int? atk;
   int? def;
   int? level;
-  final List<CardSet> cardSets;
+  final List<CardSet>? cardSets;
   final List<CardImage> cardImages;
   final List<CardPrice> cardPrices;
 
@@ -42,7 +42,7 @@ class Card {
       level: json['level'],
       attribute: json['attribute'],
       cardImages: (json['card_images'] as List).map((e) => CardImage.fromJson(e)).toList(),
-      cardSets: [],
+      cardSets: (json['card_sets'] == null) ? null : (json['card_sets'] as List).map((e) => CardSet.fromJson(e)).toList(),
       cardPrices: (json['card_prices'] as List).map((e) => CardPrice.fromJson(e)).toList(),
     );
   }
@@ -62,6 +62,16 @@ class CardSet {
     required this.rarityCode,
     required this.price,
   });
+
+  factory CardSet.fromJson(Map<String, dynamic> json) {
+    return CardSet(
+      name: json['set_name'],
+      code: json['set_code'],
+      rarity: json['set_rarity'],
+      rarityCode: json['set_rarity_code'].toString(),
+      price: json['set_price'].toString(),
+    );
+  }
 }
 
 class CardImage {
