@@ -1,10 +1,34 @@
-import 'package:tugaspraktikum8/models/card.dart' as model;
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:tugaspraktikum8/provider/card_provider.dart';
 import 'package:tugaspraktikum8/screen/detail_screen.dart';
-import 'package:tugaspraktikum8/services/card_service.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final controller = ScrollController();
+
+  @override
+  void initState() {
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.position.pixels) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Getting more card...')));
+        context.read<CardProvider>().fetchCards();
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +36,8 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Flutter Demo Home Page'),
       ),
-      body: FutureBuilder<List<model.Card>>(
-        future: CardService().findAll(2),
+      body: FutureBuilder<void>(
+        future: context.read<CardProvider>().fetchCards(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -21,74 +45,68 @@ class HomeScreen extends StatelessWidget {
             );
           }
 
-          if (snapshot.data == null) {
-            return const Center(
-              child: Text('No data'),
-            );
-          }
+          return Consumer<CardProvider>(
+            builder: (context, value, child) {
 
-          if (snapshot.data!.isEmpty) {
-            return const Center(
-              child: Text('No data'),
-            );
-          }
+              return ListView.builder(
+                controller: controller,
+                itemCount: value.cards.length,
+                itemBuilder: (context, index) {
+                  final data = value.cards[index];
 
-          return ListView.builder(
-            itemCount: snapshot.data!.length,
-            itemBuilder: (context, index) {
-              final data = snapshot.data![index];
-
-              if (data.type == "Spell Card" || data.type == "Trap Card") {
-                return ListTile(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => DetailScreen(
-                          card: snapshot.data![index],
-                        ),
+                  if (data.type == "Spell Card" || data.type == "Trap Card") {
+                    return ListTile(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => DetailScreen(
+                              card: value.cards[index],
+                            ),
+                          ),
+                        );
+                      },
+                      leading: Image.network(data.cardImages[0].smallUrl),
+                      title: Text(value.cards[index].name),
+                      subtitle: Text(value.cards[index].race),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text("${value.cards[index].type}"),
+                        ],
                       ),
                     );
-                  },
-                  leading: Image.network(data.cardImages[0].smallUrl),
-                  title: Text(snapshot.data![index].name),
-                  subtitle: Text(snapshot.data![index].race),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text("${snapshot.data![index].type}"),
-                    ],
-                  ),
-                );
-              }
+                  }
 
-              return ListTile(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => DetailScreen(
-                        card: snapshot.data![index],
-                      ),
+                  return ListTile(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => DetailScreen(
+                            card: value.cards[index],
+                          ),
+                        ),
+                      );
+                    },
+                    leading: Image.network(data.cardImages[0].smallUrl),
+                    title: Text(value.cards[index].name),
+                    subtitle: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text("ATK : ${value.cards[index].atk}"),
+                        const SizedBox(width: 10),
+                        Text("DEF : ${value.cards[index].def}"),
+                        const SizedBox(width: 10),
+                        Text("LVL : ${value.cards[index].level}"),
+                      ],
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text("${value.cards[index].type}"),
+                      ],
                     ),
                   );
                 },
-                leading: Image.network(data.cardImages[0].smallUrl),
-                title: Text(snapshot.data![index].name),
-                subtitle: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text("ATK : ${snapshot.data![index].atk}"),
-                    const SizedBox(width: 10),
-                    Text("DEF : ${snapshot.data![index].def}"),
-                    const SizedBox(width: 10),
-                    Text("LVL : ${snapshot.data![index].level}"),
-                  ],
-                ),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text("${snapshot.data![index].type}"),
-                  ],
-                ),
               );
             },
           );

@@ -4,6 +4,7 @@ import 'package:tugaspraktikum8/widget/price_card.dart';
 
 class DetailScreen extends StatelessWidget {
   final model.Card card;
+
   const DetailScreen({super.key, required this.card});
 
   @override
@@ -72,7 +73,7 @@ class DetailScreen extends StatelessWidget {
               Text(card.description),
               const SizedBox(height: 10),
               Text(
-                'Price',
+                'Market Price',
                 style: Theme.of(context).textTheme.headline6,
               ),
               const SizedBox(height: 4),
@@ -147,18 +148,25 @@ class DetailScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline6,
               ),
               const SizedBox(height: 4),
-              ...List.generate(card.cardSets!.length, (index) {
-                final set = card.cardSets![index];
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: const Divider(color: Colors.black),
+              ),
+              const SizedBox(height: 4),
+              ...(card.cardSets != null)
+                  ? List.generate(card.cardSets!.length, (index) {
+                      final set = card.cardSets![index];
 
-                return Card(
-                  child: ListTile(
-                    leading: CircleAvatar(child: Text(set.rarityCode)),
-                    title: Text(set.name),
-                    subtitle: Text(set.code),
-                    trailing: Text('\$${set.price}'),
-                  ),
-                );
-              })
+                      return Card(
+                        child: ListTile(
+                          leading: CircleAvatar(child: Text(set.rarityCode)),
+                          title: Text(set.name),
+                          subtitle: Text(set.code),
+                          trailing: Text('\$${set.price}'),
+                        ),
+                      );
+                    })
+                  : [const Text('Set not available')],
             ],
           ),
         ),
