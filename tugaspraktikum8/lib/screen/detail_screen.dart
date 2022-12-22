@@ -35,26 +35,43 @@ class DetailScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Card Info',
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                      const SizedBox(height: 10),
-                      Text("ID : ${card.id}"),
-                      const SizedBox(height: 10),
-                      Text("ATK : ${card.atk}"),
-                      const SizedBox(height: 10),
-                      Text("DEF : ${card.def}"),
-                      const SizedBox(height: 10),
-                      Text("LVL : ${card.level}"),
-                      const SizedBox(height: 10),
-                      Text('Card Type : ${card.type}'),
-                      const SizedBox(height: 10),
-                      Text('Attribute: ${card.attribute}'),
-                      const SizedBox(height: 10),
-                      Text('Archetype: ${card.archetype ?? 'No Archetype'}'),
-                      const SizedBox(height: 10),
-                      Text('Race: ${card.race}'),
+                      ...(card.type == "Spell Card" || card.type == "Trap Card")
+                          ? [
+                              Text(
+                                'Card Info',
+                                style: Theme.of(context).textTheme.headline6,
+                              ),
+                              const SizedBox(height: 10),
+                              Text("ID : ${card.id}"),
+                              const SizedBox(height: 10),
+                              Text('Card Type : ${card.type}'),
+                              const SizedBox(height: 10),
+                              Text('Archetype: ${card.archetype ?? 'No Archetype'}'),
+                              const SizedBox(height: 10),
+                              Text('Race: ${card.race}'),
+                            ]
+                          : [
+                              Text(
+                                'Card Info',
+                                style: Theme.of(context).textTheme.headline6,
+                              ),
+                              const SizedBox(height: 10),
+                              Text("ID : ${card.id}"),
+                              const SizedBox(height: 10),
+                              Text("ATK : ${card.atk}"),
+                              const SizedBox(height: 10),
+                              Text("DEF : ${card.def}"),
+                              const SizedBox(height: 10),
+                              Text("LVL : ${card.level}"),
+                              const SizedBox(height: 10),
+                              Text('Card Type : ${card.type}'),
+                              const SizedBox(height: 10),
+                              Text('Attribute: ${card.attribute}'),
+                              const SizedBox(height: 10),
+                              Text('Archetype: ${card.archetype ?? 'No Archetype'}'),
+                              const SizedBox(height: 10),
+                              Text('Race: ${card.race}'),
+                            ],
                     ],
                   ),
                 ],
@@ -154,18 +171,21 @@ class DetailScreen extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               ...(card.cardSets != null)
-                  ? List.generate(card.cardSets!.length, (index) {
-                      final set = card.cardSets![index];
+                  ? List.generate(
+                      card.cardSets!.length,
+                      (index) {
+                        final set = card.cardSets![index];
 
-                      return Card(
-                        child: ListTile(
-                          leading: CircleAvatar(child: Text(set.rarityCode)),
-                          title: Text(set.name),
-                          subtitle: Text(set.code),
-                          trailing: Text('\$${set.price}'),
-                        ),
-                      );
-                    })
+                        return Card(
+                          child: ListTile(
+                            leading: CircleAvatar(child: Text(set.rarityCode)),
+                            title: Text(set.name),
+                            subtitle: Text(set.code),
+                            trailing: Text('\$${set.price}'),
+                          ),
+                        );
+                      },
+                    )
                   : [const Text('Set not available')],
             ],
           ),
