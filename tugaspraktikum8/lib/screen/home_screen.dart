@@ -1,6 +1,6 @@
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:tugaspraktikum8/provider/card_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:tugaspraktikum8/provider/home_card_provider.dart';
 import 'package:tugaspraktikum8/screen/detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.position.pixels) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Getting more card...')));
-        context.read<CardProvider>().fetchCards();
+        context.read<HomeCardProvider>().fetchCards();
       }
     });
     super.initState();
@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Flutter Demo Home Page'),
       ),
       body: FutureBuilder<void>(
-        future: context.read<CardProvider>().fetchCards(),
+        future: context.read<HomeCardProvider>().fetchCards(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -45,9 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }
 
-          return Consumer<CardProvider>(
+          return Consumer<HomeCardProvider>(
             builder: (context, value, child) {
-
               return ListView.builder(
                 controller: controller,
                 itemCount: value.cards.length,
