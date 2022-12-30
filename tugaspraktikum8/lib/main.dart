@@ -22,7 +22,7 @@ class InitialApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Yugipedia App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

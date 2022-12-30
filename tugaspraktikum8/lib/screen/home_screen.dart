@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Demo Home Page'),
+        title: const Text('Yugipedia App'),
       ),
       body: FutureBuilder<void>(
         future: context.read<HomeCardProvider>().fetchCards(),
