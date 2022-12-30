@@ -42,7 +42,8 @@ class Card {
       level: json['level'],
       attribute: json['attribute'],
       cardImages: (json['card_images'] as List).map((e) => CardImage.fromJson(e)).toList(),
-      cardSets: (json['card_sets'] == null) ? null : (json['card_sets'] as List).map((e) => CardSet.fromJson(e)).toList(),
+      cardSets:
+          (json['card_sets'] == null) ? null : (json['card_sets'] as List).map((e) => CardSet.fromJson(e)).toList(),
       cardPrices: (json['card_prices'] as List).map((e) => CardPrice.fromJson(e)).toList(),
     );
   }

@@ -52,10 +52,10 @@ class HomeScreen extends StatelessWidget {
                           height: MediaQuery.of(context).size.height / 2.5,
                           child: const Center(
                             child: Text(
-                              'Wave Clipper Two',
+                              'What you can cook today?',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 24,
+                                fontSize: 28,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -175,7 +175,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  const Text('App Name v1.0.0'),
+                  const Text('What You Can Cook v1.0.0'),
                   const SizedBox(height: 20),
                 ],
               ),

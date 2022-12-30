@@ -12,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final controller = ScrollController();
+  final searchController = TextEditingController();
 
   @override
   void initState() {
