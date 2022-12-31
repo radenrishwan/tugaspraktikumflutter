@@ -1,6 +1,3 @@
-[submodule "crack-the-roll"]
-	path = crack-the-roll
-	url = https://github.com/radenrishwan/crack-the-roll
 [submodule "uas/crack-the-roll"]
 	path = uas/crack-the-roll
 	url = https://github.com/radenrishwan/crack-the-roll
