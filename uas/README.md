@@ -10,4 +10,4 @@
 ### Links
 - [Tugas Praktikum 8](../tugaspraktikum7)
 - [Tugas Praktikum 9](../tugaspraktikum8)
-- [UAS](crack-the-roll)
+- [UAS](https://github.com/radenrishwan/crack-the-roll/tree/532e1ad076dd813ba9c3d849704e4d9a409264e4)
